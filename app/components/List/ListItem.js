@@ -7,13 +7,14 @@ import Icon from './Icon';
 
 const ListItem = (props) => {
 
-    const { onPress, text, selected = false, checkmark = true, visible = true } = props;
+    const { onPress, text, selected = false, checkmark = true, visible = true, customIcon = null } = props;
 
     return(
         <TouchableHighlight onPress={onPress} underlayColor={styles.$underlayColor}>
             <View style={styles.row}>
                 <Text style={styles.text}>{text}</Text>
                 {selected ? <Icon checkmark={checkmark} visible={visible} /> : <Icon />}
+                {customIcon}
             </View>
         </TouchableHighlight>
     )
@@ -25,6 +26,7 @@ ListItem.propTypes = {
     selected: PropTypes.bool,
     checkmark: PropTypes.bool,
     visible: PropTypes.bool,
+    customIcon: PropTypes.element,
 }
 
 export default ListItem;
