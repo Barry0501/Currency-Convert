@@ -46,7 +46,7 @@ class Home extends Component{
 
                 <Header onPress={this.handleOptionPress} />
 
-                <KeyboardAvoidingView behavior="padding">
+                <KeyboardAvoidingView>
                     <Logo />
 
                     <InputWithButton
