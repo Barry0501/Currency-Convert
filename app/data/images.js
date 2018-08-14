@@ -6,6 +6,7 @@ const Images = {
     check: require('../components/Logo/images/check.png'),
     arrowRight: require('../components/Logo/images/arrow_right.png'),
     link: require('../components/Logo/images/unlink.png'),
+    arrowLeft: require('../components/Logo/images/left-arrow.png'),
 }
 
 export default Images;

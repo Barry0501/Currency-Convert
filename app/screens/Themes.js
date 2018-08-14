@@ -55,7 +55,7 @@ class Themes extends Component{
                     onPress={() => this.handleThemePress(styles.$purple)}
                     iconBackground={styles.$purple}
                 />
-                <Separator />
+                <Separator />               
             </ScrollView>
         )
     }

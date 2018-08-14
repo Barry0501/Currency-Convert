@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, StatusBar, KeyboardAvoidingView } from 'react-native';
+import PropTypes from 'prop-types';
 
 
 import  Container  from '../components/Container/Container';
@@ -8,6 +9,7 @@ import { InputWithButton } from '../components/TextInput';
 import { ClearButton } from '../components/Buttons';
 import { LastConverted } from '../components/Text'
 import  Header from '../components/Header/Header';
+import Utils from '../config/Utils';
 
 const TEMP_BASE_CURRENCY = 'USD';
 const TEMP_QUOTE_CURRENCY = 'GBP';
@@ -17,12 +19,24 @@ const TEMP_CONVERSION_RATE = 0.7974;
 const TEMP_CONVERSION_DATE = new Date();
 
 class Home extends Component{
+    static propTypes = {
+        navigation: PropTypes.object,
+    }
+
+    componentWillMount(){
+        this.setStatusBar();
+    }
+
+    setStatusBar = () => { 
+        StatusBar.setHidden(true);
+    } 
+
     handlePressBaseCurrency = () => {
-        alert('press base');
+        Utils.goscreen(this,'CurrencyList',{title:'Base Currency'})
     }
 
     handlePressQuoteCurrency = () => {
-        //alert('press quote');
+        Utils.goscreen(this,'CurrencyList',{title:'Quote Currency'})
     }
 
     handleTextChange = (text) => {
@@ -59,7 +73,7 @@ class Home extends Component{
 
                     <InputWithButton
                         buttonText={TEMP_QUOTE_CURRENCY}
-                        onPress={this.handlePressBaseCurrency}
+                        onPress={this.handlePressQuoteCurrency}
                         editable={false}
                         value={TEMP_QUOTE_PRICE}
                     />

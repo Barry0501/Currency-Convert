@@ -5,7 +5,7 @@ import { View, Text, Keyboard, Animated, StyleSheet, Platform } from 'react-nati
 import Images from '../../data/images';
 import styles from './styles';
 
-const ANIMATION_DURATION = 250;
+const ANIMATION_DURATION = 10;
 
 class Logo extends Component{
 
@@ -51,8 +51,6 @@ class Logo extends Component{
             duration: ANIMATION_DURATION,
           }),
         ]).start();
-        console.log('this.state.containerImageWidth',this.state.containerImageWidth)
-        console.log('this.state.imageWidth',this.state.imageWidth)
       };
     
       keyboardWillHide = () => {
@@ -66,7 +64,6 @@ class Logo extends Component{
             duration: ANIMATION_DURATION,
           }),
         ]).start();
-        console.log('hide')
       };
 
     render(){

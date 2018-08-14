@@ -9,14 +9,13 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  StatusBar
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-import Home from './screens/Home';
-import CurrencyList from './screens/CurrencyList';
-import Option from './screens/Option';
-import Themes from './screens/Themes';
+import Title from '../app/components/Header/Title';
+import { AppStack } from './config/routes';
 
 EStyleSheet.build({
   $primaryOrange: '#D57A66',
@@ -30,4 +29,18 @@ EStyleSheet.build({
   $darkText: '#343434',
 })
 
-export default () => <Themes />;
+export default class App extends Component{
+  render() {
+		return (
+			<View style={{flex: 1}}>
+				<StatusBar
+					backgroundColor='#E8E8E9'
+					barStyle="light-content"
+					translucent={true}
+				/>
+				<AppStack/>
+			</View>
+
+		);
+	}
+} 
