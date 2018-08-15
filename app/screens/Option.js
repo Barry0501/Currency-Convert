@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
 import { ScrollView, StatusBar, Image } from 'react-native';
+import PropTypes from 'prop-types';
 
 import { ListItem, Separator } from '../components/List';
 import Images from '../data/images';
+import Title from '../components/Header/Title';
+import Utils from '../config/Utils';
 
 const ICON_COLOR = '#868686';
 const ICON_SIZE = 23;
 
 class Option extends Component{
+    constructor(props){
+        super(props);
+        titleScreen = this.props.navigation.state.params.title;
+
+        StatusBar.setHidden(false);
+    }
+
+    static propTypes = {
+        navigation: PropTypes.object,
+    }
+
     handleThemePress = () => {
-        alert('press themes');
+        Utils.goscreen(this,'Themes',{title:'Themes'})
     }
 
     handleSitePress = () =>{
@@ -19,7 +33,11 @@ class Option extends Component{
     render(){
         return(
             <ScrollView>
-                <StatusBar translucent={false} barStyle="default" />
+                <Title text={titleScreen}
+                    onPress={() => {
+                        Utils.goback(this);
+                    }}
+                />
                 <ListItem 
                     text="Themes"
                     onPress={this.handleThemePress}

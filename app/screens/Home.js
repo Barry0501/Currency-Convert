@@ -48,7 +48,7 @@ class Home extends Component{
     }
 
     handleOptionPress = () => {
-        alert('press gear');
+        Utils.goscreen(this,'Options',{title:'Options'})
     }
 
     render(){

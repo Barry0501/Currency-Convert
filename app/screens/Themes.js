@@ -3,6 +3,8 @@ import { View, Text, ScrollView,StatusBar } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import { ListItem, Separator } from '../components/List';
+import Title from '../components/Header/Title';
+import Utils from '../config/Utils';
 
 const styles = EStyleSheet.create({
     $blue: '$primaryBlue',
@@ -12,6 +14,13 @@ const styles = EStyleSheet.create({
 })
 
 class Themes extends Component{
+    constructor(props){
+        super(props);
+        titleScreen = this.props.navigation.state.params.title;
+
+        StatusBar.setHidden(false);
+    }
+
     handleThemePress = (color) => {
         alert('press theme',color)
     }
@@ -19,7 +28,11 @@ class Themes extends Component{
     render(){
         return(
             <ScrollView>
-                <StatusBar translucent={false} barStyle="default" />
+                <Title text={titleScreen}
+                    onPress={() => {
+                        Utils.goback(this);
+                    }}
+                />
                 <ListItem 
                     text="Blue"
                     onPress={this.handleThemePress}
