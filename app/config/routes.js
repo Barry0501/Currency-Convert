@@ -45,5 +45,7 @@ export const AppStack = createStackNavigator(
     {
         mode: 'modal',
         headerMode: 'none',
+        cardStyle: { paddingTop: StatusBar.currentHeight } // fix for Android
     }
 )
+

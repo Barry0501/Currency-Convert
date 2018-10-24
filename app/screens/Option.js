@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, StatusBar, Image } from 'react-native';
+import { ScrollView, StatusBar, Image, Linking} from 'react-native';
 import PropTypes from 'prop-types';
 
 import { ListItem, Separator } from '../components/List';
@@ -27,7 +27,8 @@ class Option extends Component{
     }
 
     handleSitePress = () =>{
-        alert('press site');
+        Linking.openURL('http://www.bongda.com.vn/')
+        .catch((err) => alert(err))
     }
 
     render(){

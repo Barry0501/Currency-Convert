@@ -22,17 +22,14 @@ class CurrencyList extends Component{
     }
 
     handlePress = () => {
-        alert('pressed')
+        //this.props.navigation.goBack(null)
+        //alert('pressed')
     }
 
     render() {
         return (
             <View>
-                <Title text={titleScreen}
-                    onPress={() => {
-                        Utils.goback(this);
-                    }}
-                />
+                <Title text={titleScreen} onPress={() => Utils.goback(this)} />
                 <FlatList
                     data={currencies}
                     renderItem={({ item }) =>
