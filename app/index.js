@@ -13,8 +13,8 @@ import {
   StatusBar
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import  {AlertProvider} from './components/Alert/index'
 
-import Title from '../app/components/Header/Title';
 import { AppStack } from './config/routes';
 
 EStyleSheet.build({
@@ -29,18 +29,20 @@ EStyleSheet.build({
   $darkText: '#343434',
 })
 
-export default class App extends Component{
+export default class App extends Component {
   render() {
-		return (
-			<View style={{flex: 1}}>
-				<StatusBar
-					backgroundColor='#E8E8E9'
-					barStyle="light-content"
-					translucent={true}
-				/>
-				<AppStack/>
-			</View>
+    return (
+      <AlertProvider>
+        <View style={{ flex: 1 }}>
+          <StatusBar
+            backgroundColor='#E8E8E9'
+            barStyle="light-content"
+            translucent={true}
+          />
+          <AppStack />
+        </View>
+      </AlertProvider>
 
-		);
-	}
+    );
+  }
 } 

@@ -6,6 +6,7 @@ import { ListItem, Separator } from '../components/List';
 import Images from '../data/images';
 import Title from '../components/Header/Title';
 import Utils from '../config/Utils';
+import { connectAlert } from '../components/Alert/index';
 
 const ICON_COLOR = '#868686';
 const ICON_SIZE = 23;
@@ -20,15 +21,16 @@ class Option extends Component{
 
     static propTypes = {
         navigation: PropTypes.object,
+        alertWithType: PropTypes.func,
     }
 
     handleThemePress = () => {
         Utils.goscreen(this,'Themes',{title:'Themes'})
     }
 
-    handleSitePress = () =>{
-        Linking.openURL('http://www.bongda.com.vn/')
-        .catch((err) => alert(err))
+    handleSitePress = () => { 
+        Linking.openURL('ssshttp://www.bongda.com.vn/')
+        .catch((err) => this.props.alertWithType('error','Sorry!', "This Url can't be opened right now"))
     }
 
     render(){
@@ -66,4 +68,4 @@ class Option extends Component{
     }
 }
 
-export default Option;
+export default connectAlert(Option);
