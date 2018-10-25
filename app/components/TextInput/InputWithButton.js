@@ -6,7 +6,7 @@ import styles from './styles';
 
 const InputWithButton = (props) => {
 
-    const {onPress, buttonText, editable = true, defaultValue} = props;
+    const {onPress, buttonText, editable = true } = props;
 
     const underlayColor = 'blue';
 
@@ -34,7 +34,6 @@ InputWithButton.propTypes = {
     onPress: PropTypes.func,
     buttonText: PropTypes.string,
     editable: PropTypes.bool,
-    defaultValue: PropTypes.string,
 }
 
 export default InputWithButton;

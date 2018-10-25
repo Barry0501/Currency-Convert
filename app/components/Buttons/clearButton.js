@@ -9,7 +9,7 @@ const ClearButton = (props) => {
 
     const {onPress, text, } = props;
     return(
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={onPress}>
             <View style={styles.wraper}>
                 <Image resizeMode="contain" style={styles.icon} source={Images.icon} />
                 <Text style={styles.text}>{text}</Text>

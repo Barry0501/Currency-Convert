@@ -11,6 +11,8 @@ import { LastConverted } from '../components/Text'
 import  Header from '../components/Header/Header';
 import Utils from '../config/Utils';
 
+import { swapCurrency,changeCurrencyAmount } from "../actions/currencies";
+
 const TEMP_BASE_CURRENCY = 'USD';
 const TEMP_QUOTE_CURRENCY = 'GBP';
 const TEMP_BASE_PRICE = '100';
@@ -39,12 +41,12 @@ class Home extends Component{
         Utils.goscreen(this,'CurrencyList',{title:'Quote Currency'})
     }
 
-    handleTextChange = (text) => {
-        console.log('change text', text);
+    handleTextChange = (amount) => {
+        console.log(changeCurrencyAmount(amount));
     }
 
     handleSwapCurrency = () => {
-        alert('press swap');
+        console.log(swapCurrency())
     }
 
     handleOptionPress = () => {
@@ -68,7 +70,7 @@ class Home extends Component{
                         onPress={this.handlePressBaseCurrency}
                         defaultValue={TEMP_BASE_PRICE}
                         keyboardType="numeric"
-                        onChangText={(value) => this.handleTextChange(value)}
+                        onChangeText={this.handleTextChange}
                     />
 
                     <InputWithButton
