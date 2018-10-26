@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StatusBar, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
-
+import { connect } from "react-redux";
 
 import  Container  from '../components/Container/Container';
 import { Logo } from '../components/Logo';
@@ -13,16 +13,16 @@ import Utils from '../config/Utils';
 
 import { swapCurrency,changeCurrencyAmount } from "../actions/currencies";
 
-const TEMP_BASE_CURRENCY = 'USD';
-const TEMP_QUOTE_CURRENCY = 'GBP';
-const TEMP_BASE_PRICE = '100';
-const TEMP_QUOTE_PRICE = '79.94';
-const TEMP_CONVERSION_RATE = 0.7974;
-const TEMP_CONVERSION_DATE = new Date();
 
 class Home extends Component{
     static propTypes = {
         navigation: PropTypes.object,
+        dispatch: PropTypes.func,
+        baseCurrency: PropTypes.string,
+        quoteCurrency: PropTypes.string,
+        conversionRate: PropTypes.number,
+        isFetching: PropTypes.bool,
+        lastConversionDate: PropTypes.object,
     }
 
     componentWillMount(){
@@ -42,11 +42,11 @@ class Home extends Component{
     }
 
     handleTextChange = (amount) => {
-        console.log(changeCurrencyAmount(amount));
+        this.props.dispatch(changeCurrencyAmount(amount));
     }
 
     handleSwapCurrency = () => {
-        console.log(swapCurrency())
+        this.props.dispatch(swapCurrency())
     }
 
     handleOptionPress = () => {
@@ -54,6 +54,12 @@ class Home extends Component{
     }
 
     render(){
+
+        let quotePrice = (this.props.amount * this.props.conversionRate).toFixed(2);
+        if(this.props.isFetching){
+            quotePrice = '...'
+        }
+
         return(
             <Container>
                 <StatusBar translucent={false} // cho Android
@@ -66,25 +72,25 @@ class Home extends Component{
                     <Logo />
 
                     <InputWithButton
-                        buttonText={TEMP_BASE_CURRENCY}
+                        buttonText={this.props.baseCurrency}
                         onPress={this.handlePressBaseCurrency}
-                        defaultValue={TEMP_BASE_PRICE}
+                        defaultValue={this.props.amount.toString()}
                         keyboardType="numeric"
                         onChangeText={this.handleTextChange}
                     />
 
                     <InputWithButton
-                        buttonText={TEMP_QUOTE_CURRENCY}
+                        buttonText={this.props.quoteCurrency}
                         onPress={this.handlePressQuoteCurrency}
                         editable={false}
-                        value={TEMP_QUOTE_PRICE}
+                        value={quotePrice}
                     />
 
                     <LastConverted 
-                        base={TEMP_BASE_CURRENCY}
-                        quote={TEMP_QUOTE_CURRENCY}
-                        date = {TEMP_CONVERSION_DATE}
-                        conversionRate = {TEMP_CONVERSION_RATE}
+                        base={this.props.baseCurrency}
+                        quote={this.props.quoteCurrency}
+                        date = {this.props.lastConversionDate}
+                        conversionRate = {this.props.conversionRate}
                     />
 
                     <ClearButton 
@@ -97,5 +103,21 @@ class Home extends Component{
     }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+    const baseCurrency = state.currencies.baseCurrency;
+    const quoteCurrency = state.currencies.quoteCurrency;
+    const conversionSelector = state.currencies.conversions[baseCurrency] || {};
+    const rates = conversionSelector.rates || {};
+
+    return {
+        baseCurrency,
+        quoteCurrency,
+        amount: state.currencies.amount,
+        conversionRate: rates[quoteCurrency] || 0,
+        isFetching: conversionSelector.isFetching,
+        lastConversionDate: conversionSelector.date ? new Date(conversionSelector.date) : new Date(),
+    };
+}
+
+export default connect(mapStateToProps)(Home);
 

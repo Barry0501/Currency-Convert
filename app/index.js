@@ -13,9 +13,11 @@ import {
   StatusBar
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import  {AlertProvider} from './components/Alert/index'
+import { AlertProvider } from './components/Alert/index'
+import { Provider } from "react-redux";
 
 import { AppStack } from './config/routes';
+import store from "./config/store";
 
 EStyleSheet.build({
   $primaryOrange: '#D57A66',
@@ -32,16 +34,18 @@ EStyleSheet.build({
 export default class App extends Component {
   render() {
     return (
-      <AlertProvider>
-        <View style={{ flex: 1 }}>
-          <StatusBar
-            backgroundColor='#E8E8E9'
-            barStyle="light-content"
-            translucent={true}
-          />
-          <AppStack />
-        </View>
-      </AlertProvider>
+      <Provider store={store}>
+        <AlertProvider>
+          <View style={{ flex: 1 }}>
+            <StatusBar
+              backgroundColor='#E8E8E9'
+              barStyle="light-content"
+              translucent={true}
+            />
+            <AppStack />
+          </View>
+        </AlertProvider>
+      </Provider>
 
     );
   }
