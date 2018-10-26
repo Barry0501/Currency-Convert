@@ -22,6 +22,8 @@ class CurrencyList extends Component{
     static propTypes = {
         navigation: PropTypes.object,
         dispatch: PropTypes.func,
+        baseCurrency: PropTypes.string,
+        quoteCurrency: PropTypes.string,
     }
 
     handlePress = (currency) => {
@@ -38,6 +40,10 @@ class CurrencyList extends Component{
     }
 
     render() {
+        let comparisionCurrency = this.props.baseCurrency;
+        if(this.props.navigation.state.params.type == "quote"){
+            comparisionCurrency = this.props.quoteCurrency;
+        }
         return (
             <View>
                 <Title text={titleScreen} onPress={() => Utils.goback(this)} />
@@ -46,7 +52,7 @@ class CurrencyList extends Component{
                     renderItem={({ item }) =>
                         <ListItem
                             text={item}
-                            selected={item === TEMP_CURRENT_CURRENCY}
+                            selected={item === comparisionCurrency}
                             onPress={() => this.handlePress(item)}
                         />
                     }
@@ -59,4 +65,11 @@ class CurrencyList extends Component{
     }
 };
 
-export default connect()(CurrencyList);
+const mapStateToProps = (state) => {
+    return{
+        baseCurrency: state.currencies.baseCurrency,
+        quoteCurrency: state.currencies.quoteCurrency
+    }
+}
+
+export default connect(mapStateToProps)(CurrencyList);
