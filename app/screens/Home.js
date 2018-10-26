@@ -34,11 +34,11 @@ class Home extends Component{
     } 
 
     handlePressBaseCurrency = () => {
-        Utils.goscreen(this,'CurrencyList',{title:'Base Currency'})
+        Utils.goscreen(this,'CurrencyList',{title:'Base Currency', type: 'base'})
     }
 
     handlePressQuoteCurrency = () => {
-        Utils.goscreen(this,'CurrencyList',{title:'Quote Currency'})
+        Utils.goscreen(this,'CurrencyList',{title:'Quote Currency', type: 'quote'})
     }
 
     handleTextChange = (amount) => {
