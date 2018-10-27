@@ -30,6 +30,7 @@ class Themes extends Component{
 
     handleThemePress = (color) => {
         this.props.dispatch(changePrimaryColor(color));
+        Utils.goback(this);
     }
 
     render(){

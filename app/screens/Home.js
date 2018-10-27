@@ -23,6 +23,7 @@ class Home extends Component{
         conversionRate: PropTypes.number,
         isFetching: PropTypes.bool,
         lastConversionDate: PropTypes.object,
+        primaryColor: PropTypes.string,
     }
 
     componentWillMount(){
@@ -61,7 +62,7 @@ class Home extends Component{
         }
 
         return(
-            <Container>
+            <Container backgroundColor={this.props.primaryColor}>
                 <StatusBar translucent={false} // cho Android
                     barStyle="light-content" // cho IOS
                 />
@@ -69,7 +70,7 @@ class Home extends Component{
                 <Header onPress={this.handleOptionPress} />
 
                 <KeyboardAvoidingView>
-                    <Logo />
+                    <Logo tintColor={this.props.primaryColor} />
 
                     <InputWithButton
                         buttonText={this.props.baseCurrency}
@@ -77,6 +78,7 @@ class Home extends Component{
                         defaultValue={this.props.amount.toString()}
                         keyboardType="numeric"
                         onChangeText={this.handleTextChange}
+                        textColor={this.props.primaryColor}
                     />
 
                     <InputWithButton
@@ -84,6 +86,7 @@ class Home extends Component{
                         onPress={this.handlePressQuoteCurrency}
                         editable={false}
                         value={quotePrice}
+                        textColor={this.props.primaryColor}
                     />
 
                     <LastConverted 
@@ -116,6 +119,7 @@ const mapStateToProps = (state) => {
         conversionRate: rates[quoteCurrency] || 0,
         isFetching: conversionSelector.isFetching,
         lastConversionDate: conversionSelector.date ? new Date(conversionSelector.date) : new Date(),
+        primaryColor: state.theme.primaryColor
     };
 }
 
