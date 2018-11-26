@@ -11,7 +11,7 @@ import { LastConverted } from '../components/Text'
 import  Header from '../components/Header/Header';
 import Utils from '../config/Utils';
 
-import { swapCurrency,changeCurrencyAmount } from "../actions/currencies";
+import { swapCurrency,changeCurrencyAmount, getInitialConversion } from "../actions/currencies";
 
 
 class Home extends Component{
@@ -28,6 +28,7 @@ class Home extends Component{
 
     componentWillMount(){
         this.setStatusBar();
+        this.props.dispatch(getInitialConversion());
     }
 
     setStatusBar = () => { 
